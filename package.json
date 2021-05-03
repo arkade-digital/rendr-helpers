@@ -1,0 +1,47 @@
+{
+  "name": "rendr-helpers",
+  "version": "1.0.0",
+  "description": "helper functions to support rendr api related developement",
+  "main": "build/index.js",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "build": "rimraf ./build && tsc",
+    "lint": "eslint . --ext .ts",
+    "lint-and-fix": "eslint . --ext .ts --fix",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkade-digital/rendr-helpers.git"
+  },
+  "keywords": [
+    "rendr",
+    "node",
+    "typescript",
+    "arkade"
+  ],
+  "author": "Tejas Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arkade-digital/rendr-helpers/issues"
+  },
+  "homepage": "https://github.com/arkade-digital/rendr-helpers#readme",
+  "dependencies": {
+    "dayjs": "^1.10.4",
+    "isomorphic-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/isomorphic-fetch": "^0.0.35",
+    "@types/node": "^14.14.6",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.4"
+  }
+}
