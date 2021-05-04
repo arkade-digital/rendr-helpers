@@ -23,9 +23,12 @@ interface lineItemT {
   name: string;
   price_cents: number;
   quantity: number;
+  packing_instructions?: string;
 }
 
-interface quotePayloadAddressT {
+interface AddressT {
+  business?: boolean;
+  address?: string;
   city: string;
   state: string;
   post_code: string;
@@ -33,6 +36,7 @@ interface quotePayloadAddressT {
 
 interface parcelT {
   reference: string;
+  description?: string;
   length_cm: number;
   width_cm: number;
   height_cm: number;
@@ -42,7 +46,17 @@ interface parcelT {
 
 export interface quotePayloadT {
   store_id: string;
-  address: quotePayloadAddressT;
+  address: AddressT;
+  line_items: Array<lineItemT>;
+  parcels: Array<parcelT>;
+}
+
+export interface requestDeliveryPayloadT {
+  store_id: string;
+  reference: string;
+  ready_for_pickup_at: string;
+  delivery_type: string;
+  address: AddressT;
   line_items: Array<lineItemT>;
   parcels: Array<parcelT>;
 }
