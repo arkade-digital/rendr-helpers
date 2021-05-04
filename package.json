@@ -20,7 +20,8 @@
     "rendr",
     "node",
     "typescript",
-    "arkade"
+    "arkade",
+    "isomorphic"
   ],
   "author": "Tejas Patel",
   "license": "ISC",
