@@ -1,6 +1,6 @@
 {
   "name": "rendr-helpers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "helper functions to support rendr api related developement",
   "main": "build/index.js",
   "files": [
