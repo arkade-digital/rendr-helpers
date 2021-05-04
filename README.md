@@ -20,15 +20,15 @@ const rates = getShippingRates(rendrAccessToken, tenantId, payload, store, state
 Packages id developed in TypeScript all argument definition can be seen in IDE.
 
 ## Utils
-few supporting constants and functions are provided as well
+Supporting constants and functions are provided as well
 
 ### Functions
-getNextDate
+getNextDate    
 isStoreClosed
 
 ### Constant 
-TIMEZONE_MAPPING
-DEFAULT_OPENING_HOURS
+TIMEZONE_MAPPING  
+DEFAULT_OPENING_HOURS  
 SERVICE_LIST
 
 ```
