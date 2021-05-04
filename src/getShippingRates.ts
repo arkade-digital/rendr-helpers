@@ -15,6 +15,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const getShippingRates = async (
+  rednrApiUrl: string,
   rendrAccessToken: string,
   tenantId: string,
   payload: quotePayloadT,
@@ -106,12 +107,14 @@ const getShippingRates = async (
   if (deliveryDateAfter12) {
     [quote, nextQuote] = await Promise.all([
       getQuote(
+        rednrApiUrl,
         rendrAccessToken,
         tenantId,
         payload,
         deliveryDate.utc().format('YYYY-MM-DDTHH:mm:ss.000[Z]'),
       ),
       getQuote(
+        rednrApiUrl,
         rendrAccessToken,
         tenantId,
         payload,
@@ -120,6 +123,7 @@ const getShippingRates = async (
     ]);
   } else {
     quote = await getQuote(
+      rednrApiUrl,
       rendrAccessToken,
       tenantId,
       payload,

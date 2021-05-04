@@ -2,6 +2,7 @@ import 'isomorphic-fetch';
 import { quotePayloadT, requestDeliveryPayloadT } from '../types';
 
 const getQuote = (
+  apiUrl: string,
   token: string,
   tenantId: string,
   payload: quotePayloadT,
@@ -9,7 +10,7 @@ const getQuote = (
 ): Promise<any> => {
   const body = JSON.stringify({ ...payload, ready_for_pickup_at: date });
 
-  return fetch(`${process.env.RENDR_API_URL}/${tenantId}/deliveries/quote`, {
+  return fetch(`${apiUrl}/${tenantId}/deliveries/quote`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,8 +23,12 @@ const getQuote = (
   });
 };
 
-export const getStore = (token: string, storeId: number): Promise<any> => {
-  return fetch(`${process.env.RENDR_API_URL}/${storeId}`, {
+export const getStore = (
+  apiUrl: string,
+  token: string,
+  storeId: number,
+): Promise<any> => {
+  return fetch(`${apiUrl}/${storeId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -33,13 +38,14 @@ export const getStore = (token: string, storeId: number): Promise<any> => {
 };
 
 export const requestDelivery = (
+  apiUrl: string,
   token: string,
   tenantId: string,
   payload: requestDeliveryPayloadT,
 ): Promise<any> => {
   const body = JSON.stringify(payload);
 
-  return fetch(`${process.env.RENDR_API_URL}/${tenantId}/deliveries`, {
+  return fetch(`${apiUrl}/${tenantId}/deliveries`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
