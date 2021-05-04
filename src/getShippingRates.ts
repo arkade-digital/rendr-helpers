@@ -8,7 +8,7 @@ import {
 import dayjs, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import rateT, { errorT, quotePayloadT, stateT, storeT } from './types';
+import rateT, { quotePayloadT, stateT, storeT } from './types';
 import getQuote from './api';
 
 dayjs.extend(utc);
@@ -21,7 +21,7 @@ const getShippingRates = async (
   store: storeT,
   state: stateT = 'NSW',
   bufferOnDeliveryTime = 30,
-): Promise<errorT | Array<rateT>> => {
+): Promise<Error | Array<rateT>> => {
   const rates: Array<rateT> = [];
   const maxBufferOnDeliveryTime = Math.max(30, bufferOnDeliveryTime);
   // we need to return info no base of the timezone it request
@@ -53,10 +53,7 @@ const getShippingRates = async (
   }
 
   if (isStoreClosed(from, to)) {
-    return {
-      error: 'No store open days found for next 7 days.',
-      errorType: 'store',
-    };
+    throw new Error('No store open days found for next 7 days.');
   }
 
   const buffer = Math.max(maxBufferOnDeliveryTime, Number(buffer_minutes));
@@ -83,10 +80,7 @@ const getShippingRates = async (
       maxBufferOnDeliveryTime,
     );
     if (!deliveryDate) {
-      return {
-        error: 'No next oped day found for after closing time.',
-        errorType: 'store',
-      };
+      throw new Error('No next open day found for after closing time.');
     }
   } else {
     // delivery date is in between opening and closing time
