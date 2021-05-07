@@ -43,7 +43,7 @@ const getShippingRates = async (
   );
   let deliveryDateAfter12 = null;
 
-  let storeDate = dayjs().tz(storeTimeZone);
+  let storeDate = dayjs(selectedDeliveryDate).tz(storeTimeZone);
   let day = storeDate.day();
   const currentDay = storeDate.day();
   let { from, to, buffer_minutes } = openingHours[day];
