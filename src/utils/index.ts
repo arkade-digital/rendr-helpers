@@ -36,6 +36,7 @@ const getNextDate = (
   currentDay: number,
   opening_hours: Array<openingHourT>,
   maxProductBuffer: number,
+  addBuffer = false,
 ): Dayjs | null => {
   let from, to, buffer_minutes;
   for (let i = 0; i < 7; i++) {
@@ -50,7 +51,9 @@ const getNextDate = (
   if (!from || !to) return null;
   if (isStoreClosed(from, to)) return null;
 
-  const buffer = Math.max(maxProductBuffer, Number(buffer_minutes));
+  const buffer = addBuffer
+    ? Math.max(maxProductBuffer, Number(buffer_minutes))
+    : 0;
   const fromArray = from.split(':');
   const fromDate = storeDate
     .hour(Number(fromArray[0]))

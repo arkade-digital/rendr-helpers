@@ -20,7 +20,9 @@ const getShippingRates = async (
   tenantId: string,
   payload: quotePayloadT,
   store: storeT,
+  selectedDeliveryDate: Date,
   state: stateT = 'NSW',
+  addBuffer = false,
   bufferOnDeliveryTime = 30,
 ): Promise<Error | Array<rateT>> => {
   const rates: Array<rateT> = [];
@@ -36,7 +38,9 @@ const getShippingRates = async (
     openingHours = store.opening_hours;
   }
 
-  let deliveryDate: Dayjs | null = dayjs().tz(storeTimeZone);
+  let deliveryDate: Dayjs | null = dayjs(selectedDeliveryDate).tz(
+    storeTimeZone,
+  );
   let deliveryDateAfter12 = null;
 
   let storeDate = dayjs().tz(storeTimeZone);
@@ -57,7 +61,9 @@ const getShippingRates = async (
     throw new Error('No store open days found for next 7 days.');
   }
 
-  const buffer = Math.max(maxBufferOnDeliveryTime, Number(buffer_minutes));
+  const buffer = addBuffer
+    ? Math.max(maxBufferOnDeliveryTime, Number(buffer_minutes))
+    : 0;
 
   const fromArray = from.split(':');
   const fromDate = storeDate
@@ -79,6 +85,7 @@ const getShippingRates = async (
       day,
       openingHours,
       maxBufferOnDeliveryTime,
+      addBuffer,
     );
     if (!deliveryDate) {
       throw new Error('No next open day found for after closing time.');
@@ -94,6 +101,7 @@ const getShippingRates = async (
         currentDay,
         openingHours,
         maxBufferOnDeliveryTime,
+        addBuffer,
       );
       if (!deliveryDateAfter12) {
         console.log('No next open day found for after 12.');
@@ -132,7 +140,7 @@ const getShippingRates = async (
   }
 
   const standard = nextQuote?.data?.standard || quote?.data?.standard;
-  const flexible = nextQuote?.data?.flexible || quote?.data?.standard;
+  const flexible = nextQuote?.data?.flexible || quote?.data?.flexible;
   const fast = quote.data?.fast;
 
   if (standard) {
