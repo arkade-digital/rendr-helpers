@@ -1,6 +1,6 @@
 {
   "name": "rendr-helpers",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "description": "helper functions to support rendr api related developement",
   "main": "build/index.js",
   "files": [
@@ -10,8 +10,7 @@
     "build": "rimraf ./build && tsc",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "publish": "yarn build & npm publish"
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "repository": {
     "type": "git",
