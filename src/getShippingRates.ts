@@ -126,7 +126,7 @@ const getShippingRates = async (
         rendrAccessToken,
         tenantId,
         payload,
-        deliveryDate.utc().format('YYYY-MM-DDTHH:mm:ss.000[Z]'),
+        deliveryDateAfter12.utc().format('YYYY-MM-DDTHH:mm:ss.000[Z]'),
       ),
     ]);
   } else {
